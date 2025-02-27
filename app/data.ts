@@ -95,6 +95,12 @@ export const BLOG_POSTS: BlogPost[] = [
     link: 'https://medium.com/@tyrnt/understanding-devops-b17bad763ff7',
     uid: 'blog-1',
   },
+  {
+    title: 'Travel Sri Lanka',
+    description: 'Travel Sri Lanka is one of my old blogs. I started this after my O/L exams. But it is not active now.',
+    link: 'https://travelsinsrilanka.blogspot.com/',
+    uid: 'blog-2',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
