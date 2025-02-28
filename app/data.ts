@@ -51,7 +51,7 @@ export const PROJECTS: Project[] = [
   {
     src: 'https://i.postimg.cc/FKHL09Px/adventurerunner.png',
     title: 'Adventure Runner - 3D',
-    description: 'Endlis runner mobile game',
+    description: 'Endless runner mobile game',
     paragraph1: 'Adventure Runner - 3D is a free endless runner game. It has two maps and four players. At the start of the game, only one map and one player will be available, and you can unlock one map and three players from in-game money.',
     paragraph2: 'Project is open source and available on GitHub.',
     link: 'https://github.com/algotyrnt/Endless-Runner-3D-UnityMobileGame',
