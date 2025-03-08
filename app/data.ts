@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     paragraph1: 'Codeon is a code analyser that leverages AI to analyze code, offer intelligent recommendations, and help developers improve their programming skills. Whether you are a beginner or an experienced coder, Codeon provides tailored feedback to optimize your code quality and efficiency.',
     paragraph2: 'Codeon supports multiple programming languages, real-time collaboration, and an intuitive user interface. With features like code analytics, error detection, and performance insights, Codeon empowers developers to write better code faster.',
     link: 'https://codeon.site/',
-    id: 'pro1',
+    id: 'pro5',
   },
   {
     src: 'https://i.postimg.cc/0QLKg79t/shiftsl.png',
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     paragraph1: 'ShiftSL simplifies hospital workforce management by providing an intuitive platform for HR admins, ward admins, and doctors. HR admins can create wards, manage user accounts, and assign ward admins, while ward admins handle shift scheduling and doctor assignments. Doctors can request leave, and unfilled shifts are automatically moved to a shift pool for others to claim.',
     paragraph2: 'With integrated WhatsApp notifications via Twilio, real-time shift updates, and secure authentication using Spring Security, ShiftSL ensures seamless coordination between hospital staff. Designed for efficiency and reliability, ShiftSL helps hospitals manage their workforce effortlessly.',
     link: 'https://shiftsl.com/',
-    id: 'pro2',
+    id: 'pro4',
   },
   {
     src: 'https://i.postimg.cc/FKHL09Px/adventurerunner.png',
@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     paragraph1: 'The game "Colombo Street Race" is a 3D car race based in the city of Colombo in Sri Lanka. This game has four game mods, Four cars, and Three maps.',
     paragraph2: '',
     link: 'https://youtu.be/JnfKdvAaXt4?si=ke5wRvnnEdhD-SDJ',
-    id: 'pro4',
+    id: 'pro2',
   },
   {
     src: 'https://i.postimg.cc/DmKgXZB1/movecubic.png',
@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
     paragraph1: '',
     paragraph2: '',
     link: '#',
-    id: 'pro5',
+    id: 'pro1',
   },
 ]
 
@@ -93,13 +93,13 @@ export const BLOG_POSTS: BlogPost[] = [
     title: 'Understanding DevOps',
     description: 'In today’s fast-paced technological landscape, businesses must adapt quickly to remain competitive. One approach that has revolutionized software development and IT operations is DevOps.',
     link: 'https://medium.com/@tyrnt/understanding-devops-b17bad763ff7',
-    uid: 'blog-1',
+    uid: 'blog2',
   },
   {
     title: 'Travel Sri Lanka',
     description: 'Travel Sri Lanka is one of my old blogs. I started this after my O/L exams. But it is not active now.',
     link: 'https://travelsinsrilanka.blogspot.com/',
-    uid: 'blog-2',
+    uid: 'blog1',
   },
 ]
 
@@ -119,6 +119,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Facebook',
     link: 'https://facebook.com/algotyrnt',
+  },
+  {
+    label: 'CV',
+    link: 'https://drive.google.com/file/d/1i_Mn9JUcKX9ROPpQbeD2rWapawEMsdwi/view?usp=sharing',
   },
 ]
 
