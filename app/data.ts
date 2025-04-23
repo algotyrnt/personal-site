@@ -79,11 +79,11 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Freelance',
+    company: 'WSO2',
     title: 'intern',
-    start: '2025',
+    start: '2025 Jun',
     end: 'Present',
-    link: 'https://ibelick.com',
+    link: 'https://wso2.com/',
     id: 'work1',
   },
 ]

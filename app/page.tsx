@@ -18,7 +18,7 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import { PlusIcon } from 'lucide-react';
 import {
   PROJECTS,
-  //WORK_EXPERIENCE,
+  WORK_EXPERIENCE,
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
@@ -191,11 +191,11 @@ export default function Personal() {
         </div>
       </motion.section>
 
-      {/* <motion.section
+      <motion.section
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
+        <h3 className="mb-5 text-lg font-medium">Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
@@ -227,7 +227,7 @@ export default function Personal() {
             </a>
           ))}
         </div>
-      </motion.section> */}
+      </motion.section>
 
       <motion.section
         variants={VARIANTS_SECTION}
