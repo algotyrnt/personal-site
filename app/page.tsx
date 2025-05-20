@@ -144,7 +144,7 @@ export default function Personal() {
                   </DisclosureTrigger>
                   <DisclosureContent>
                     <div className="flex flex-col pb-4 text-[13px] text-zinc-300 dark:text-zinc-700">
-                      <p className="line-clamp-3">{project.paragraph1}</p>
+                      <p className="line-clamp-3">{project.description}</p>
                       {project.link && (
                         <a
                           href={project.link}
