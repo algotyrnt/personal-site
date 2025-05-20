@@ -2,8 +2,6 @@ type Project = {
   src: string
   title: string
   description: string
-  paragraph1: string
-  paragraph2: string
   link: string
   id: string
 }
@@ -33,36 +31,28 @@ export const PROJECTS: Project[] = [
   {
     src: 'https://i.postimg.cc/zf2Rj96Y/codeon.png',
     title: 'Codeon',
-    description: 'AI-powered code analyser that provide personalized feedback.',
-    paragraph1: 'Codeon is a code analyser that leverages AI to analyze code, offer intelligent recommendations, and help developers improve their programming skills.',
-    paragraph2: 'With features like code analytics, error detection, and performance insights, Codeon empowers developers to write better code faster.',
+    description: 'AI-powered code analyser that provide personalized and inteligent feedback to help programmers improve.',
     link: 'https://codeon.site/',
     id: 'pro5',
   },
   {
     src: 'https://i.postimg.cc/0QLKg79t/shiftsl.png',
     title: 'ShiftSL',
-    description: 'A smart roster management system for hospitals.',
-    paragraph1: 'ShiftSL is a simplifies hospital roster management system that provide an intuitive, efficiency and reliabile platform to manage workforce effortlessly.',
-    paragraph2: 'With integrated WhatsApp notifications, real-time shift updates, and secure authentication, ShiftSL ensures seamless coordination between hospital staff.',
+    description: 'A simplified and smart roster management system to manage workforce effortlessly.',
     link: 'https://shiftsl.com/',
     id: 'pro4',
   },
   {
     src: 'https://i.postimg.cc/FKHL09Px/adventurerunner.png',
     title: 'Adventure Runner - 3D',
-    description: 'Endless runner mobile game',
-    paragraph1: 'Adventure Runner - 3D is a free endless runner game. It has two maps and four players. At the start of the game, only one map and one player will be available, and you can unlock one map and three players from in-game money.',
-    paragraph2: 'Project is open source and available on GitHub.',
+    description: 'Adventure Runner - 3D is a free endless runner game, Project is open source and available on GitHub.',
     link: 'https://github.com/algotyrnt/Endless-Runner-3D-UnityMobileGame',
     id: 'pro3',
   },
   {
     src: 'https://i.postimg.cc/y3PWJnnp/csr.png',
     title: 'Colombo Street Race',
-    description: 'Mobile game',
-    paragraph1: 'The game "Colombo Street Race" is a 3D car race based in the city of Colombo in Sri Lanka. This game has four game mods, Four cars, and Three maps.',
-    paragraph2: '',
+    description: 'The game "Colombo Street Race" is a 3D car race based in the city of Colombo in Sri Lanka.',
     link: 'https://youtu.be/JnfKdvAaXt4?si=ke5wRvnnEdhD-SDJ',
     id: 'pro2',
   },
@@ -70,8 +60,6 @@ export const PROJECTS: Project[] = [
     src: 'https://i.postimg.cc/DmKgXZB1/movecubic.png',
     title: 'Move Cubic - 3D',
     description: 'Mobile game',
-    paragraph1: '',
-    paragraph2: '',
     link: '#',
     id: 'pro1',
   },
@@ -79,11 +67,11 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Freelance',
+    company: 'WSO2',
     title: 'intern',
-    start: '2025',
-    end: 'Present',
-    link: 'https://ibelick.com',
+    start: '2025 Jun',
+    end: 'present',
+    link: 'https://wso2.com/',
     id: 'work1',
   },
 ]
@@ -121,10 +109,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Instagram',
     link: 'https://www.instagram.com/algotyrnt',
-  },
-  {
-    label: 'CV',
-    link: 'https://drive.google.com/file/d/11yZInpOJ6153A8a5ntF4jegNDy6_n655/view?usp=sharing',
   },
 ]
 
