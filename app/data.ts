@@ -29,13 +29,6 @@ type SocialLink = {
 
 export const PROJECTS: Project[] = [
   {
-    src: 'https://i.postimg.cc/zf2Rj96Y/codeon.png',
-    title: 'Codeon',
-    description: 'AI-powered code analyser that provide personalized and inteligent feedback to help programmers improve.',
-    link: 'https://codeon.site/',
-    id: 'pro5',
-  },
-  {
     src: 'https://i.postimg.cc/0QLKg79t/shiftsl.png',
     title: 'ShiftSL',
     description: 'A simplified and smart roster management system to manage workforce effortlessly.',
