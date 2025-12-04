@@ -4,7 +4,6 @@ import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
-import { useState } from 'react'
 import {
   WORK_EXPERIENCE,
   BLOG_POSTS,
@@ -64,25 +63,6 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
-  const [openProjectId, setOpenProjectId] = useState<string | null>(null)
-
-  const imageVariants = {
-    collapsed: { scale: 1, filter: 'blur(0px)' },
-    expanded: { scale: 1.1, filter: 'blur(3px)' },
-  }
-
-  const contentVariants = {
-    collapsed: { opacity: 0, y: 0 },
-    expanded: { opacity: 1, y: 0 },
-  }
-
-  const transition = {
-    type: 'spring',
-    stiffness: 26.7,
-    damping: 4.1,
-    mass: 0.2,
-  }
-
   return (
     <motion.main
       className="space-y-24"
