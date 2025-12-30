@@ -4,8 +4,14 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  WEBSITE_URL,
+} from '@/util/data'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -14,9 +20,29 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'algotyrnt',
-  description:
-    'Computer Science Undergraduate',
+  title: {
+    default: SITE_NAME,
+    template: '%s | ' + SITE_NAME,
+  },
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(WEBSITE_URL),
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: SITE_NAME, url: WEBSITE_URL }],
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: WEBSITE_URL,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  alternates: {
+    canonical: WEBSITE_URL,
+  },
 }
 
 const geist = Geist({
@@ -49,7 +75,7 @@ export default function RootLayout({
             <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
               <Header />
               {children}
-              <SpeedInsights/>
+              <SpeedInsights />
               <Analytics />
               <Footer />
             </div>
