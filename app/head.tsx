@@ -1,41 +1,6 @@
-import React from 'react'
-import {
-  EMAIL,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  SOCIAL_LINKS,
-  WEBSITE_URL,
-} from '@/util/data'
-
-export default function Head() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: SITE_NAME,
-    url: WEBSITE_URL,
-    email: `mailto:${EMAIL}`,
-    sameAs: SOCIAL_LINKS.map((s) => s.link),
-    jobTitle: SITE_DESCRIPTION,
-  }
-
-  return (
-    <>
-      <link rel="canonical" href={WEBSITE_URL} />
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-        crossOrigin="anonymous"
-      />
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin="anonymous"
-      />
-      <script
-        key="ld+json"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </>
-  )
-}
+// This file is intentionally left blank.
+//
+// In the Next.js App Router, metadata (including canonical links,
+// preconnects, and JSON-LD structured data) should be defined in
+// `layout.tsx` via the `metadata` export or within the layout component
+// itself. The `Head` component in `app/head.tsx` is not used.
