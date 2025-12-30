@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   metadataBase: new URL(WEBSITE_URL),
   keywords: SITE_KEYWORDS,
-  authors: [{ name: SITE_NAME, url: WEBSITE_URL }],
+  authors: [{ name: 'Punjitha Bandara', url: WEBSITE_URL }],
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
