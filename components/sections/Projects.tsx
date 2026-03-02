@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Spotlight } from '@/components/ui/spotlight'
+import { AnimatedBackground } from '@/components/ui/animated-background'
 import { GITHUB_USERNAME } from '@/util/data'
 
 type Repo = {
@@ -64,19 +64,24 @@ export function ProjectsSection() {
                 </a>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {projects.map((project) => (
-                    <a
-                        className="relative h-full overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-                        href={`https://github.com/${project.author}/${project.name}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={`${project.author}-${project.name}`}
-                    >
-                        <Spotlight
-                            className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                            size={64}
-                        />
-                        <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+                <AnimatedBackground
+                    enableHover
+                    className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+                    transition={{
+                        type: 'spring',
+                        bounce: 0,
+                        duration: 0.2,
+                    }}
+                >
+                    {projects.map((project) => (
+                        <a
+                            className="rounded-xl p-4 relative z-10 block"
+                            href={`https://github.com/${project.author}/${project.name}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            key={`${project.author}-${project.name}`}
+                            data-id={`${project.author}-${project.name}`}
+                        >
                             <div className="relative z-50 flex flex-col space-y-1">
                                 <div className="flex items-center justify-between">
                                     <h4 className="font-medium dark:text-zinc-100">
@@ -100,9 +105,9 @@ export function ProjectsSection() {
                                     {project.description || 'No description provided.'}
                                 </p>
                             </div>
-                        </div>
-                    </a>
-                ))}
+                        </a>
+                    ))}
+                </AnimatedBackground>
             </div>
         </motion.section>
     )
