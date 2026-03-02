@@ -7,12 +7,7 @@ type WorkExperience = {
   id: string
 }
 
-type BlogPost = {
-  title: string
-  description: string
-  link: string
-  uid: string
-}
+
 
 type SocialLink = {
   label: string
