@@ -1,9 +1,8 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MEDIUM_USERNAME } from '@/util/data'
+import { FadeIn } from '@/components/ui/fade-in'
 
 type MediumPost = {
     title: string
@@ -17,41 +16,28 @@ type MediumPost = {
     categories: string[]
 }
 
-const VARIANTS_SECTION = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
-}
-
-const TRANSITION_SECTION = {
-    duration: 0.3,
-}
-
-export function BlogsSection() {
-    const [blogs, setBlogs] = useState<MediumPost[]>([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        async function fetchBlogs() {
-            try {
-                const res = await fetch(
-                    `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${MEDIUM_USERNAME}`
-                )
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                if (data.status === 'ok') {
-                    // Take the latest 4 posts
-                    setBlogs(data.items.slice(0, 4))
-                }
-            } catch (error) {
-                console.error('Error fetching medium blogs:', error)
-            } finally {
-                setLoading(false)
-            }
+async function getBlogs() {
+    try {
+        const res = await fetch(
+            `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${MEDIUM_USERNAME}`,
+            { next: { revalidate: 3600 } } // Cache for 1 hour
+        )
+        if (!res.ok) throw new Error('Failed to fetch')
+        const data = await res.json()
+        if (data.status === 'ok') {
+            return data.items.slice(0, 4)
         }
-        fetchBlogs()
-    }, [])
+        return []
+    } catch (error) {
+        console.error('Error fetching medium blogs:', error)
+        return []
+    }
+}
 
-    if (loading || blogs.length === 0) return null
+export async function BlogsSection() {
+    const blogs: MediumPost[] = await getBlogs()
+
+    if (blogs.length === 0) return null
 
     // Helper to extract a short description from the HTML content safely
     const extractDescription = (content: string) => {
@@ -61,12 +47,7 @@ export function BlogsSection() {
     }
 
     return (
-        <motion.section
-            variants={VARIANTS_SECTION}
-            transition={TRANSITION_SECTION}
-            initial="hidden"
-            animate="visible"
-        >
+        <FadeIn className="space-y-4">
             <div className="flex items-center justify-between mb-3">
                 <h2 className="text-lg font-medium">Blog</h2>
                 <a
@@ -97,8 +78,19 @@ export function BlogsSection() {
                             rel="noopener noreferrer"
                             data-id={post.guid}
                         >
-                            <div className="relative z-50 flex flex-col space-y-1 p-2">
-                                <h3 className="font-normal dark:text-zinc-100">
+                            <div className="relative z-50 flex flex-col space-y-3 p-2">
+                                {post.thumbnail && (
+                                    <div className="relative h-32 w-full overflow-hidden rounded-md">
+                                        <Image
+                                            src={post.thumbnail}
+                                            alt={post.title}
+                                            fill
+                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                            sizes="(max-width: 640px) 100vw, 50vw"
+                                        />
+                                    </div>
+                                )}
+                                <h3 className="font-normal dark:text-zinc-100 line-clamp-2">
                                     {post.title}
                                 </h3>
                                 <p className="text-zinc-500 dark:text-zinc-400 text-sm">
@@ -116,6 +108,6 @@ export function BlogsSection() {
                     ))}
                 </AnimatedBackground>
             </div>
-        </motion.section>
+        </FadeIn>
     )
 }

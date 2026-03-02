@@ -1,8 +1,6 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import { GITHUB_USERNAME } from '@/util/data'
+import { FadeIn } from '@/components/ui/fade-in'
 
 type Repo = {
     author: string
@@ -12,46 +10,27 @@ type Repo = {
     stars: number
 }
 
-const VARIANTS_SECTION = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+async function getProjects() {
+    try {
+        const res = await fetch(
+            `https://pinned.berrysauce.dev/get/${GITHUB_USERNAME}`,
+            { next: { revalidate: 3600 } } // Cache for 1 hour
+        )
+        if (!res.ok) throw new Error('Failed to fetch pinned repos')
+        return res.json()
+    } catch (error) {
+        console.error('Error fetching github repos:', error)
+        return []
+    }
 }
 
-const TRANSITION_SECTION = {
-    duration: 0.3,
-}
+export async function ProjectsSection() {
+    const projects: Repo[] = await getProjects()
 
-export function ProjectsSection() {
-    const [projects, setProjects] = useState<Repo[]>([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        async function fetchProjects() {
-            try {
-                const res = await fetch(
-                    `https://pinned.berrysauce.dev/get/${GITHUB_USERNAME}`
-                )
-                if (!res.ok) throw new Error('Failed to fetch pinned repos')
-                const data = await res.json()
-                setProjects(data)
-            } catch (error) {
-                console.error('Error fetching github repos:', error)
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchProjects()
-    }, [])
-
-    if (loading || projects.length === 0) return null
+    if (projects.length === 0) return null
 
     return (
-        <motion.section
-            variants={VARIANTS_SECTION}
-            transition={TRANSITION_SECTION}
-            initial="hidden"
-            animate="visible"
-        >
+        <FadeIn className="space-y-4">
             <div className="flex items-center justify-between mb-5">
                 <h2 className="text-lg font-medium">Projects</h2>
                 <a
@@ -109,6 +88,6 @@ export function ProjectsSection() {
                     ))}
                 </AnimatedBackground>
             </div>
-        </motion.section>
+        </FadeIn>
     )
 }
