@@ -4,7 +4,7 @@ import { ABOUT_TEXT, EMAIL, SOCIAL_LINKS, WORK_EXPERIENCE } from '@/util/data'
 import { ProjectsSection } from '@/components/sections/Projects'
 import { BlogsSection } from '@/components/sections/Blogs'
 import { Magnetic } from '@/components/ui/magnetic'
-import { Spotlight } from '@/components/ui/spotlight'
+import { AnimatedBackground } from '@/components/ui/animated-background'
 
 function MagneticSocialLink({
   children,
@@ -78,22 +78,27 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map((job) => (
-            <a
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={job.id}
-            >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row justify-between">
+        <h3 className="mb-5 text-lg font-medium">Experience</h3>
+        <div className="flex flex-col space-y-0">
+          <AnimatedBackground
+            enableHover
+            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.2,
+            }}
+          >
+            {WORK_EXPERIENCE.map((job) => (
+              <a
+                className="-mx-3 rounded-xl px-3 py-3 relative z-10 block"
+                href={job.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={job.id}
+                data-id={job.id}
+              >
+                <div className="relative z-50 flex w-full flex-row justify-between p-2">
                   <div>
                     <h4 className="font-normal dark:text-zinc-100">
                       {job.title}
@@ -106,9 +111,9 @@ export default function Personal() {
                     {job.start} - {job.end}
                   </p>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))}
+          </AnimatedBackground>
         </div>
       </motion.section>
 
