@@ -1,23 +1,10 @@
-'use client'
-import { motion } from 'framer-motion'
 import { WORK_EXPERIENCE } from '@/util/data'
 import { AnimatedBackground } from '@/components/ui/animated-background'
-
-const VARIANTS_SECTION = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
-}
-
-const TRANSITION_SECTION = {
-    duration: 0.3,
-}
+import { FadeIn } from '@/components/ui/fade-in'
 
 export function ExperienceSection() {
     return (
-        <motion.section
-            variants={VARIANTS_SECTION}
-            transition={TRANSITION_SECTION}
-        >
+        <FadeIn>
             <h2 className="mb-5 text-lg font-medium">Experience</h2>
             <div className="flex flex-col space-y-0">
                 <AnimatedBackground
@@ -55,6 +42,6 @@ export function ExperienceSection() {
                     ))}
                 </AnimatedBackground>
             </div>
-        </motion.section>
+        </FadeIn>
     )
 }
