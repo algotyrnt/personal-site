@@ -5,12 +5,11 @@ import { Spotlight } from '@/components/ui/spotlight'
 import { GITHUB_USERNAME } from '@/util/data'
 
 type Repo = {
-    id: number
+    author: string
     name: string
-    html_url: string
     description: string
     language: string
-    stargazers_count: number
+    stars: number
 }
 
 const VARIANTS_SECTION = {
@@ -30,9 +29,9 @@ export function ProjectsSection() {
         async function fetchProjects() {
             try {
                 const res = await fetch(
-                    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
+                    `https://pinned.berrysauce.dev/get/${GITHUB_USERNAME}`
                 )
-                if (!res.ok) throw new Error('Failed to fetch')
+                if (!res.ok) throw new Error('Failed to fetch pinned repos')
                 const data = await res.json()
                 setProjects(data)
             } catch (error) {
@@ -68,10 +67,10 @@ export function ProjectsSection() {
                 {projects.map((project) => (
                     <a
                         className="relative h-full overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-                        href={project.html_url}
+                        href={`https://github.com/${project.author}/${project.name}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        key={project.id}
+                        key={`${project.author}-${project.name}`}
                     >
                         <Spotlight
                             className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
@@ -93,7 +92,7 @@ export function ProjectsSection() {
                                             </span>
                                         )}
                                         <span className="flex items-center">
-                                            ★ {project.stargazers_count}
+                                            ★ {project.stars}
                                         </span>
                                     </div>
                                 </div>
