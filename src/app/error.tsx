@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { StatusPage } from '@/components/ui/status-page'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 export default function Error({
   error,
@@ -16,10 +18,10 @@ export default function Error({
   }, [error])
 
   return (
-    <StatusPage
-      title="Something went wrong!"
-      message="An unexpected error occurred while loading this page."
-      action={{ type: 'button', label: 'Try again', onClick: reset }}
-    />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 10, gap: 2 }}>
+      <Typography variant="h2" sx={{ fontSize: '1.5rem', fontWeight: 500 }}>Something went wrong!</Typography>
+      <Typography color="text.secondary">An unexpected error occurred while loading this page.</Typography>
+      <Button variant="outlined" sx={{ mt: 2 }} onClick={reset}>Try again</Button>
+    </Box>
   )
 }

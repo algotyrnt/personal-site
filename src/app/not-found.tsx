@@ -1,11 +1,16 @@
-import { StatusPage } from '@/components/ui/status-page'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <StatusPage
-      title="404"
-      message="Could not find the requested resource."
-      action={{ type: 'link', label: 'Return Home', href: '/' }}
-    />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 10, gap: 2 }}>
+      <Typography variant="h1" sx={{ fontSize: '3rem', fontWeight: 700 }}>404</Typography>
+      <Typography color="text.secondary">Could not find the requested resource.</Typography>
+      <Link href="/" passHref>
+        <Button variant="outlined" sx={{ mt: 2 }}>Return Home</Button>
+      </Link>
+    </Box>
   )
 }

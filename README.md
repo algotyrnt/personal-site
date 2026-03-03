@@ -1,6 +1,6 @@
 # algotyrnt — Personal Site
 
-A minimal, fast, and fully customizable personal portfolio site. Built with Next.js, React 19, Tailwind CSS v4, and Motion. Pulls live data from GitHub (pinned repos) and Medium (latest posts).
+A minimal, fast, and fully customizable personal portfolio site. Built with Next.js (App Router), MUI, and Framer Motion. Pulls live data from GitHub (pinned repos) and Medium (latest posts).
 
 **Live:** [algotyrnt.com](https://algotyrnt.com)
 
@@ -8,14 +8,13 @@ A minimal, fast, and fully customizable personal portfolio site. Built with Next
 
 ## Tech Stack
 
-|                 |                                                                                                             |
-| --------------- | ----------------------------------------------------------------------------------------------------------- |
-| Framework       | [Next.js](https://nextjs.org/) (App Router)                                                                 |
-| Language        | TypeScript                                                                                                  |
-| Styling         | [Tailwind CSS v4](https://tailwindcss.com/)                                                                 |
-| Animations      | [Motion](https://motion.dev/) + [Motion Primitives](https://motion-primitives.com)                          |
-| Theme switching | [next-themes](https://github.com/pacocoursey/next-themes)                                                   |
-| Analytics       | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights) |
+|                  |                                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| Framework        | [Next.js](https://nextjs.org/) (App Router, React Server Components)                                        |
+| Language         | TypeScript                                                                                                  |
+| UI Components    | [Material UI (MUI)](https://mui.com/)                                                                       |
+| Animations       | [Framer Motion](https://www.framer.com/motion/)                                                             |
+| Analytics        | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights) |
 
 ---
 
@@ -23,24 +22,23 @@ A minimal, fast, and fully customizable personal portfolio site. Built with Next
 
 ```
 src/
-├── app/                    # Next.js App Router (pages, layout, metadata)
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── error.tsx
-│   ├── not-found.tsx
-│   ├── robots.ts
-│   └── sitemap.ts
+├── app/                    # Next.js App Router
+│   ├── layout.tsx          # Root layout (fonts, metadata, theme provider)
+│   ├── page.tsx            # Home page — composes all sections
+│   ├── error.tsx           # Error boundary
+│   ├── not-found.tsx       # 404 page
+│   ├── robots.ts           # robots.txt
+│   └── sitemap.ts          # sitemap.xml
 ├── components/
 │   ├── layout/             # Header and Footer
-│   ├── sections/           # Page sections (About, Experience, Projects, Blogs, Connect)
-│   └── ui/                 # Reusable primitives (animations, magnetic, etc.)
+│   ├── sections/           # Page sections: About, Work, Projects, Blogs, Connect
+│   ├── ThemeRegistry/      # MUI theme + Emotion SSR cache setup
+│   └── ui/                 # Animation primitives: FadeIn, Stagger
 ├── lib/
-│   ├── config.ts           # ← All personal data lives here (edit this to customize)
-│   ├── constants.ts        # Shared runtime constants (transitions, etc.)
-│   ├── utils.ts            # cn() utility
+│   ├── config.ts           # ← All personal data lives here (the only file you need to edit)
 │   └── api/
-│       ├── github.ts       # GitHub GraphQL — fetches pinned repos
-│       └── medium.ts       # Medium RSS — fetches latest posts
+│       ├── github.ts       # GitHub GraphQL API — fetches pinned repos
+│       └── medium.ts       # Medium RSS feed — fetches latest posts
 └── types/
     └── index.ts            # Shared TypeScript types
 ```
@@ -52,7 +50,7 @@ src/
 ### Prerequisites
 
 - Node.js 20+
-- A GitHub personal access token (for fetching pinned repos)
+- A GitHub personal access token (for the Projects section)
 
 ### 1. Clone the repo
 
@@ -69,13 +67,17 @@ npm install
 
 ### 3. Set environment variables
 
-Create a `.env.local` file at the root:
+```bash
+cp .env.example .env.local
+```
+
+Then open `.env.local` and fill in your GitHub token:
 
 ```env
 GITHUB_TOKEN=your_github_personal_access_token
 ```
 
-> The token only needs `public_repo` (read-only) scope. Without it the Projects section will be hidden gracefully.
+> The token only needs `read:user` scope. Without it, the Projects section will be gracefully hidden.
 
 ### 4. Start the dev server
 
@@ -89,13 +91,14 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Customizing for Your Own Use
 
-All personal content is in a single file — **`src/lib/config.ts`**. Update these fields:
+All personal content lives in a single file — **`src/lib/config.ts`**. It's the only file you need to edit:
 
 ```ts
 export const EMAIL = 'you@example.com'
 export const WEBSITE_URL = 'https://yoursite.com'
 export const SITE_NAME = 'Your Name'
 export const SITE_DESCRIPTION = 'One-line bio.'
+export const SITE_KEYWORDS = ['your-name', 'Software Engineer']
 
 export const ABOUT_TEXT = `Your longer about paragraph.`
 
@@ -111,7 +114,7 @@ export const WORK_EXPERIENCE = [
 ]
 
 export const GITHUB_USERNAME = 'your-github-username'
-export const MEDIUM_USERNAME = 'your-medium-username' // or remove the BlogsSection
+export const MEDIUM_USERNAME = 'your-medium-username' // remove BlogsSection if unused
 
 export const SOCIAL_LINKS = [
   { label: 'Github', link: 'https://github.com/you' },
@@ -120,24 +123,24 @@ export const SOCIAL_LINKS = [
 ]
 ```
 
-**To remove a section**, simply delete its import from `src/app/page.tsx`.
+**To remove a section**, delete its import from `src/app/page.tsx`.
 
 ---
 
 ## Deployment
 
-The project is optimized for [Vercel](https://vercel.com/). Click below to deploy instantly:
+Optimized for [Vercel](https://vercel.com/). Deploy with one click:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/algotyrnt/personal-site)
 
-Add the `GITHUB_TOKEN` environment variable in the Vercel project settings under **Settings → Environment Variables**.
+After deploying, add  `GITHUB_TOKEN` under **Vercel → Project → Settings → Environment Variables**.
 
 ---
 
 ## Scripts
 
 ```bash
-npm run dev     # Start development server
+npm run dev     # Start development server  (http://localhost:3000)
 npm run build   # Production build
 npm run start   # Start production server
 npm run lint    # Run ESLint
@@ -147,4 +150,4 @@ npm run lint    # Run ESLint
 
 ## License
 
-MIT — feel free to use this as a template for your own personal site.
+MIT — free to use as a template for your own personal site.

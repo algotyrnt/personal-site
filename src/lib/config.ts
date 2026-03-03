@@ -24,8 +24,7 @@ export const SITE_KEYWORDS = [
 
 // ─── About ────────────────────────────────────────────────────────────────────
 
-export const ABOUT_TEXT = `Software Engineer specializing in scalable architectures, systems engineering, and cloud computing.
-I enjoy building robust systems and solving complex problems with code. My experience ranges from crafting backend microservices to designing reliable cloud-native platforms.`
+export const ABOUT_TEXT = `Software Engineer specializing in scalable architectures, systems engineering, and cloud computing. I enjoy breaking things to understand how they work and love exploring the deep rabbit holes of computer science.`
 
 // ─── Work Experience ──────────────────────────────────────────────────────────
 
