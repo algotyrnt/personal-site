@@ -11,8 +11,6 @@ export function Footer() {
         mt: 3,
         pt: 2.5,
         pb: 2.5,
-        borderTop: '1px solid',
-        borderColor: 'rgba(0,0,0,0.06)',
       }}
     >
       <Stack direction="row" alignItems="center" justifyContent="space-between">

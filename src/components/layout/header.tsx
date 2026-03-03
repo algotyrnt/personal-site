@@ -26,7 +26,6 @@ export function Header() {
         bgcolor: 'rgba(248, 248, 248, 0.85)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(0,0,0,0.06)',
       }}
     >
       <motion.div
