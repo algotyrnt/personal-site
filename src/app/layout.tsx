@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import { Header } from './header'
-import { Footer } from './footer'
-import { ThemeProvider } from 'next-themes'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
+import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import {
@@ -11,12 +11,12 @@ import {
   SITE_KEYWORDS,
   SITE_NAME,
   WEBSITE_URL,
-} from '@/util/data'
+} from '@/lib/config'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff',
+  themeColor: '#fcfcfc',
 }
 
 export const metadata: Metadata = {
@@ -28,6 +28,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(WEBSITE_URL),
   keywords: SITE_KEYWORDS,
   authors: [{ name: 'Punjitha Bandara', url: WEBSITE_URL }],
+  creator: 'Punjitha Bandara',
+  publisher: 'Punjitha Bandara',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
@@ -45,13 +52,8 @@ export const metadata: Metadata = {
   },
 }
 
-const geist = Geist({
-  variable: '--font-geist',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
 })
 
@@ -62,17 +64,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
-      >
-        <ThemeProvider
-          enableSystem={true}
-          attribute="class"
-          storageKey="theme"
-          defaultTheme="light"
-        >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
+      <body className={`${inter.variable}`}>
+        <ThemeRegistry>
+          <div
+            style={{
+              display: 'flex',
+              minHeight: '100vh',
+              width: '100%',
+              flexDirection: 'column',
+              fontFamily: 'var(--font-inter)',
+            }}
+          >
+            <div
+              style={{
+                position: 'relative',
+                margin: '0 auto',
+                width: '100%',
+                maxWidth: '600px',
+                flex: 1,
+                padding: '0 20px',
+              }}
+            >
               <Header />
               {children}
               <SpeedInsights />
@@ -80,7 +92,7 @@ export default function RootLayout({
               <Footer />
             </div>
           </div>
-        </ThemeProvider>
+        </ThemeRegistry>
       </body>
     </html>
   )
