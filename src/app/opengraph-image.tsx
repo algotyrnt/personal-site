@@ -30,7 +30,7 @@ export default function OgImage() {
           textTransform: 'uppercase',
         }}
       >
-        {WEBSITE_URL.replace('https://', '')}
+        {new URL(WEBSITE_URL).hostname}
       </p>
       <h1
         style={{
