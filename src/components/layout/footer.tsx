@@ -2,8 +2,11 @@
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import Link from '@mui/material/Link'
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <Box
       component="footer"
@@ -13,21 +16,39 @@ export function Footer() {
         pb: 2.5,
       }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        alignItems="center"
+        justifyContent="space-between"
+        spacing={{ xs: 1, sm: 0 }}
+      >
         <Typography
-          component="a"
-          href="/"
           sx={{
             fontSize: '0.72rem',
             color: 'text.disabled',
-            textDecoration: 'none',
             letterSpacing: '0.02em',
-            '&:hover': { color: 'text.secondary' },
-            transition: 'color 0.2s ease',
           }}
         >
-          © {new Date().getFullYear()} algotyrnt
+          © {currentYear}{' '}
+          <Link
+            href="https://github.com/algotyrnt/personal-site"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: 'text.primary',
+              fontWeight: 400,
+              textDecoration: 'none',
+              '&:hover': {
+                color: 'primary.main',
+              },
+              transition: 'color 0.2s ease',
+            }}
+          >
+            algotyrnt
+          </Link>
+          .
         </Typography>
+
         <Typography
           sx={{
             fontSize: '0.72rem',
@@ -35,7 +56,22 @@ export function Footer() {
             letterSpacing: '0.02em',
           }}
         >
-          personal portfolio
+          Released under the{' '}
+          <Link
+            href="https://github.com/algotyrnt/personal-site/blob/main/LICENSE"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: 'text.primary',
+              textDecoration: 'none',
+              '&:hover': {
+                color: 'text.secondary',
+              },
+              transition: 'color 0.2s ease',
+            }}
+          >
+            MIT License
+          </Link>
         </Typography>
       </Stack>
     </Box>
