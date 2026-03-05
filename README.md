@@ -8,13 +8,13 @@ A minimal, fast, and fully customizable personal portfolio site. Built with Next
 
 ## Tech Stack
 
-|                  |                                                                                                             |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- |
-| Framework        | [Next.js](https://nextjs.org/) (App Router, React Server Components)                                        |
-| Language         | TypeScript                                                                                                  |
-| UI Components    | [Material UI (MUI)](https://mui.com/)                                                                       |
-| Animations       | [Framer Motion](https://www.framer.com/motion/)                                                             |
-| Analytics        | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights) |
+|               |                                                                                                             |
+| ------------- | ----------------------------------------------------------------------------------------------------------- |
+| Framework     | [Next.js](https://nextjs.org/) (App Router, React Server Components)                                        |
+| Language      | TypeScript                                                                                                  |
+| UI Components | [Material UI (MUI)](https://mui.com/)                                                                       |
+| Animations    | [Framer Motion](https://www.framer.com/motion/)                                                             |
+| Analytics     | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights) |
 
 ---
 
@@ -35,7 +35,7 @@ src/
 │   ├── ThemeRegistry/      # MUI theme + Emotion SSR cache setup
 │   └── ui/                 # Animation primitives: FadeIn, Stagger
 ├── lib/
-│   ├── config.ts           # ← All personal data lives here (the only file you need to edit)
+│   ├── config.ts           # Configuration (loads from environment variables)
 │   └── api/
 │       ├── github.ts       # GitHub GraphQL API — fetches pinned repos
 │       └── medium.ts       # Medium RSS feed — fetches latest posts
@@ -71,13 +71,30 @@ npm install
 cp .env.example .env.local
 ```
 
-Then open `.env.local` and fill in your GitHub token:
+Then open `.env.local` and configure your variables:
 
 ```env
+# Required for GitHub integration
 GITHUB_TOKEN=your_github_personal_access_token
+
+# Site configuration
+EMAIL=your-email@example.com
+WEBSITE_URL=https://yourwebsite.com
+SITE_NAME=Your Name - Your Title
+SITE_DESCRIPTION=Your professional description here.
+ABOUT_TEXT=Your about text describing your background and interests.
+
+# JSON arrays (all must be valid JSON)
+SITE_KEYWORDS=["keyword1","keyword2","Software Engineer"]
+WORK_EXPERIENCE=[{"company":"Company Name","title":"Job Title","start":"YYYY MMM","end":"present","link":"https://company.com/","id":"work1"}]
+SOCIAL_LINKS=[{"label":"Github","link":"https://github.com/yourusername"},{"label":"LinkedIn","link":"https://www.linkedin.com/in/yourusername"}]
+
+# External integrations
+GITHUB_USERNAME=yourgithubusername
+MEDIUM_USERNAME=yourmediumusername
 ```
 
-> The token only needs `read:user` scope. Without it, the Projects section will be gracefully hidden.
+> The GitHub token only needs `read:user` scope. Without it, the Projects section will be gracefully hidden.
 
 ### 4. Start the dev server
 
@@ -89,39 +106,22 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Customizing for Your Own Use
+## Configuration
 
-All personal content lives in a single file — **`src/lib/config.ts`**. It's the only file you need to edit:
+All configuration is managed through environment variables (see `.env.example`). For statically generated pages, Next.js reads these from `process.env` at build time, so changing them requires a rebuild (or restarting the dev server) for changes to take effect.
 
-```ts
-export const EMAIL = 'you@example.com'
-export const WEBSITE_URL = 'https://yoursite.com'
-export const SITE_NAME = 'Your Name'
-export const SITE_DESCRIPTION = 'One-line bio.'
-export const SITE_KEYWORDS = ['your-name', 'Software Engineer']
+**Configuration variables:**
 
-export const ABOUT_TEXT = `Your longer about paragraph.`
-
-export const WORK_EXPERIENCE = [
-  {
-    company: 'Company',
-    title: 'Role',
-    start: '2024 Jan',
-    end: 'present',
-    link: 'https://company.com',
-    id: 'work1',
-  },
-]
-
-export const GITHUB_USERNAME = 'your-github-username'
-export const MEDIUM_USERNAME = 'your-medium-username' // remove BlogsSection if unused
-
-export const SOCIAL_LINKS = [
-  { label: 'Github', link: 'https://github.com/you' },
-  { label: 'LinkedIn', link: 'https://linkedin.com/in/you' },
-  // add or remove any links
-]
-```
+- `EMAIL` — Contact email
+- `WEBSITE_URL` — Site URL
+- `SITE_NAME` — Site title
+- `SITE_DESCRIPTION` — Meta description
+- `SITE_KEYWORDS` — JSON array of keywords
+- `ABOUT_TEXT` — About section text
+- `WORK_EXPERIENCE` — JSON array of work history
+- `SOCIAL_LINKS` — JSON array of social links
+- `GITHUB_USERNAME` — GitHub username (for Projects section)
+- `MEDIUM_USERNAME` — Medium username (for Blogs section)
 
 **To remove a section**, delete its import from `src/app/page.tsx`.
 
@@ -129,11 +129,45 @@ export const SOCIAL_LINKS = [
 
 ## Deployment
 
-Optimized for [Vercel](https://vercel.com/). Deploy with one click:
+The site is a standard Next.js application and can be deployed to any platform that supports Next.js:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/algotyrnt/personal-site)
+1. **Build the project:**
 
-After deploying, add  `GITHUB_TOKEN` under **Vercel → Project → Settings → Environment Variables**.
+   ```bash
+   npm run build
+   ```
+
+2. **Set environment variables** on your hosting platform (all variables from `.env.example`)
+
+3. **Deploy** the built application
+
+**Requirements:**
+
+- Node.js 20+
+- All environment variables must be set
+- `GITHUB_TOKEN` is required for the Projects section to work
+
+### Deploying to Vercel
+
+This project includes Vercel Analytics and Speed Insights. To deploy to Vercel:
+
+1. **One-click deploy:**
+
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/algotyrnt/personal-site)
+
+2. **Or using Vercel CLI:**
+
+   ```bash
+   npm i -g vercel
+   vercel
+   ```
+
+3. **Set environment variables** in Vercel dashboard:
+   - Go to **Project Settings → Environment Variables**
+   - Add all variables from `.env.example`
+   - Redeploy for changes to take effect
+
+> Vercel Analytics and Speed Insights are automatically enabled when deployed to Vercel.
 
 ---
 
