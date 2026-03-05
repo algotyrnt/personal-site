@@ -1,0 +1,70 @@
+name: Release
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Configure Git
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+            - name: Check if version bump needed
+              id: check_version
+              run: |
+                  # Check if the last commit was a version bump
+                  if git log -1 --pretty=%B | grep -q "Bump version to"; then
+                    echo "skip=true" >> $GITHUB_OUTPUT
+                    echo "Last commit was a version bump, skipping..."
+                  else
+                    echo "skip=false" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Bump patch version
+              if: steps.check_version.outputs.skip == 'false'
+              id: version
+              run: |
+                  npm version patch -m "Bump version to %s [skip ci]"
+                  echo "new_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+            - name: Push changes
+              if: steps.check_version.outputs.skip == 'false'
+              run: |
+                  git push --follow-tags
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Create GitHub Release
+              if: steps.check_version.outputs.skip == 'false'
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: v${{ steps.version.outputs.new_version }}
+                  release_name: Release v${{ steps.version.outputs.new_version }}
+                  body: |
+                      ## What's Changed
+                      Automated patch release v${{ steps.version.outputs.new_version }}
+
+                      See all changes in this release.
+                  draft: false
+                  prerelease: false
