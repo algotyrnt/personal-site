@@ -6,6 +6,12 @@ A minimal, fast, and fully customizable personal portfolio site. Built with Next
 
 ---
 
+## Preview
+
+![Site Preview](.github/assets/preview.png)
+
+---
+
 ## Tech Stack
 
 |               |                                                                                                             |
