@@ -31,7 +31,7 @@ export function Footer() {
         >
           © {currentYear}{' '}
           <Link
-            href="https://github.com/algotyrnt/personal-site"
+            href="https://github.com/algotyrnt/nova"
             target="_blank"
             rel="noopener noreferrer"
             sx={{
@@ -58,7 +58,7 @@ export function Footer() {
         >
           Released under the{' '}
           <Link
-            href="https://github.com/algotyrnt/personal-site/blob/main/LICENSE"
+            href="https://github.com/algotyrnt/nova/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
             sx={{

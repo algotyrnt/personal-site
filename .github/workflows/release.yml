@@ -55,16 +55,10 @@ jobs:
 
             - name: Create GitHub Release
               if: steps.check_version.outputs.skip == 'false'
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              uses: softprops/action-gh-release@v2
               with:
                   tag_name: v${{ steps.version.outputs.new_version }}
-                  release_name: Release v${{ steps.version.outputs.new_version }}
-                  body: |
-                      ## What's Changed
-                      Automated patch release v${{ steps.version.outputs.new_version }}
-
-                      See all changes in this release.
+                  name: Release v${{ steps.version.outputs.new_version }}
+                  generate_release_notes: true
                   draft: false
                   prerelease: false
