@@ -1,4 +1,4 @@
-# algotyrnt — Personal Site
+# Nova
 
 A minimal, fast, and fully customizable personal portfolio site. Built with Next.js (App Router), MUI, and Framer Motion. Pulls live data from GitHub (pinned repos) and Medium (latest posts).
 
@@ -55,8 +55,8 @@ src/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/algotyrnt/personal-site.git
-cd personal-site
+git clone https://github.com/algotyrnt/nova.git
+cd nova
 ```
 
 ### 2. Install dependencies
@@ -153,7 +153,7 @@ This project includes Vercel Analytics and Speed Insights. To deploy to Vercel:
 
 1. **One-click deploy:**
 
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/algotyrnt/personal-site)
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/algotyrnt/nova)
 
 2. **Or using Vercel CLI:**
 

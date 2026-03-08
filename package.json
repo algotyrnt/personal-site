@@ -1,5 +1,5 @@
 {
-    "name": "personal-site",
+    "name": "nova",
     "version": "2.0.3",
     "private": true,
     "license": "MIT",
@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/algotyrnt/personal-site"
+        "url": "https://github.com/algotyrnt/nova"
     },
     "scripts": {
         "dev": "next dev",
