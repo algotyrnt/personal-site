@@ -118,7 +118,7 @@ Example JSON values:
     }
   ],
   "SOCIAL_LINKS": [
-    { "label": "Github", "link": "https://github.com/yourname" },
+    { "label": "GitHub", "link": "https://github.com/yourname" },
     { "label": "LinkedIn", "link": "https://linkedin.com/in/yourname" }
   ]
 }
