@@ -1,6 +1,6 @@
 {
     "name": "nova",
-    "version": "2.0.7",
+    "version": "2.1.0",
     "private": true,
     "license": "MIT",
     "author": {
@@ -16,7 +16,9 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
+        "check": "npm run lint && npm run typecheck"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",
@@ -40,6 +42,7 @@
         "eslint-config-next": "^16.1.6",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
+        "jiti": "^2.6.1",
         "prettier": "^3.7.4",
         "typescript": "^5"
     }
